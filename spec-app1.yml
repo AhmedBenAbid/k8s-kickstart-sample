@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+spec:
+  selector:
+    matchLabels:
+      app: app1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.7.9
+          ports:
+          - containerPort: 80
+          volumeMounts:
+          - mountPath: /usr/share/nginx/html/index.html
+            name: page
+      volumes:
+      - name: page
+        hostPath:
+          path: /root/k8s/app1.html
+          type: File
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-app1
+  labels:
+    app: app1
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: app1
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-app1
+spec:
+  rules:
+    - host: app1.test-k8s.tk
+      http:
+        paths: 
+        - path: /
+          backend:
+            serviceName: svc-app1
+            servicePort: 80
