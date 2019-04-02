@@ -24,4 +24,4 @@ spec:
       - name: page
         hostPath:
           path: /root/k8s/app1.html
-type: File
+          type: File
