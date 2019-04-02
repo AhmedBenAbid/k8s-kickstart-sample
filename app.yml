@@ -1,4 +1,4 @@
-extensions/v1beta1
+version: extensions/v1beta1
 kind: Deployment
 metadata:
   name: app1
