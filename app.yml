@@ -23,5 +23,5 @@ spec:
       volumes:
       - name: page
         hostPath:
-          path: /root/k8s/app1.html
+          path: /k8s/app1.html
           type: File
