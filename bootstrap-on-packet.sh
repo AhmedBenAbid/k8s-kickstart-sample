@@ -6,14 +6,14 @@
 apt-get update
 apt-get install -y apt-transport-https
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" tee -a /etc/apt/sources.list.d/kubernetes.list
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 apt-get update
 
 # Install kubelet, kubeadm and kubernetes-cni
 apt-get install -y kubelet kubeadm kubernetes-cni
 
 # Disabling SWAP
-swapoff
+swapoff -a
 sed -i '/swap/s/^/#/g' /etc/fstab
 
 # Extracting IP address and cluster initialzing
