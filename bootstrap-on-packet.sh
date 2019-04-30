@@ -8,15 +8,13 @@ apt-get update && apt-get install -qy docker.io
 
 echo; echo "Install Kubernetes apt repo"; echo
 
-apt-get update
-apt-get install -y apt-transport-https
+apt-get update && apt-get install -y apt-transport-https
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 
 echo; echo "Install kubelet, kubeadm and kubernetes-cni"; echo
 
-apt-get update
-apt-get install -y kubelet kubeadm kubernetes-cni
+apt-get update && apt-get install -y kubelet kubeadm kubernetes-cni
 
 echo; echo "Disabling SWAP"; echo
 
